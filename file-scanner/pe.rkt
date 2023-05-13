@@ -14,30 +14,30 @@
 
 
 ;;https://source.winehq.org/source/include/winnt.h
-(struct dos-header-struct 
-    (e_magic  ;      /* 00: MZ Header signature */
-     e_cblp  ;       /* 02: Bytes on last page of file */
-     e_cp  ;         /* 04: Pages in file */
-     e_crlc  ;       /* 06: Relocations */
-     e_cparhdr  ;    /* 08: Size of header in paragraphs */
-     e_minalloc  ;   /* 0a: Minimum extra paragraphs needed */
-     e_maxalloc  ;   /* 0c: Maximum extra paragraphs needed */
-     e_ss  ;         /* 0e: Initial (relative) SS value */
-     e_sp  ;         /* 10: Initial SP value */
-     e_csum  ;       /* 12: Checksum */
-     e_ip  ;         /* 14: Initial IP value */
-     e_cs  ;         /* 16: Initial (relative) CS value */
-     e_lfarlc  ;     /* 18: File address of relocation table */
-     e_ovno  ;       /* 1a: Overlay number */
-     e_res  ;        /* 1c: Reserved words */
-     e_oemid  ;      /* 24: OEM identifier (for e_oeminfo) */
-     e_oeminfo  ;    /* 26: OEM information; e_oemid specific */
-     e_res2  ;       /* 28: Reserved words */  20
-     e_lfanew))  ;   /* 3c: Offset to extended header */
+(define-struct dos-header-struct 
+    (e_magic     ; 00: MZ Header signature
+     e_cblp      ; 02: Bytes on last page of file
+     e_cp        ; 04: Pages in file
+     e_crlc      ; 06: Relocations
+     e_cparhdr   ; 08: Size of header in paragraphs
+     e_minalloc  ; 0a: Minimum extra paragraphs needed
+     e_maxalloc  ; 0c: Maximum extra paragraphs needed
+     e_ss        ; 0e: Initial (relative) SS value
+     e_sp        ; 10: Initial SP value
+     e_csum      ; 12: Checksum
+     e_ip        ; 14: Initial IP value
+     e_cs        ; 16: Initial (relative) CS value
+     e_lfarlc    ; 18: File address of relocation table
+     e_ovno      ; 1a: Overlay number
+     e_res       ; 1c: Reserved words
+     e_oemid     ; 24: OEM identifier (for e_oeminfo)
+     e_oeminfo   ; 26: OEM information; e_oemid specific
+     e_res2      ; 28: Reserved words
+     e_lfanew))  ; 3c: Offset to extended header
 
 
 (define (parse-dos-header dos-header)
-    (dos-header-struct
+    (make-dos-header-struct
       (subbytes dos-header 0 2)
       (subbytes dos-header 2 4)
       (subbytes dos-header 4 6)
